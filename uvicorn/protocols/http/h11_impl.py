@@ -166,6 +166,7 @@ class H11Protocol(asyncio.Protocol):
             try:
                 event = self.conn.next_event()
             except h11.RemoteProtocolError:
+                self.logger.warning("h11_impl threw an error")
                 msg = "Invalid HTTP request received."
                 self.logger.warning(msg)
                 self.send_400_response(msg)
